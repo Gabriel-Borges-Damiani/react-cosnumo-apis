@@ -1,13 +1,5 @@
 import { useState, useEffect } from "react";
 
-const createUser = (name, email, password) => ({
-  id: Date.now().toString(),
-  name,
-  email,
-  password,
-  createdAt: new Date().toISOString(),
-});
-
 export const useAuth = () => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
