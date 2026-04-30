@@ -9,8 +9,19 @@ import { Link } from "react-router";
 export const CardPost = ({ post }) => {
   const [likes, setLikes] = useState(post.likes);
 
-  const handleLikeButton = () => setLikes((oldState) => oldState + 1);
-  console.log("Incrementar like");
+  const token = localStorage.getItem("access_token");
+
+  const handleLikeButton = () => {
+    fetch(`http://localhost:3000/blog-posts/${post.id}/like`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+    }).then((response) => {
+      if (response.ok) {
+        setLikes((oldState) => oldState + 1);
+        console.log("Incrementar like");
+      }
+    });
+  };
 
   return (
     <article className={styles.card}>
