@@ -5,6 +5,7 @@ import { Author } from "../Author";
 import { ThumbsUpButton } from "./ThumbsUpButton";
 import { ModalComment } from "../ModalComment";
 import { Link } from "react-router";
+import { http } from "../../api";
 
 export const CardPost = ({ post }) => {
   const [likes, setLikes] = useState(post.likes);
@@ -12,15 +13,20 @@ export const CardPost = ({ post }) => {
   const token = localStorage.getItem("access_token");
 
   const handleLikeButton = () => {
-    fetch(`http://localhost:3000/blog-posts/${post.id}/like`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
-    }).then((response) => {
-      if (response.ok) {
+    http
+      .post(
+        `blog-posts/${post.id}/like`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      )
+      .then(() => {
         setLikes((oldState) => oldState + 1);
         console.log("Incrementar like");
-      }
-    });
+      });
   };
 
   return (
