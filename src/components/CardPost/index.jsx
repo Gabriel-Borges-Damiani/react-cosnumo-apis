@@ -13,27 +13,15 @@ export const CardPost = ({ post }) => {
   const [comments, setComments] = useState(post.comments);
   const { isAuthenticated } = useAuth;
 
-  const token = localStorage.getItem("access_token");
-
   const handleNewComment = (comment) => {
     setComments([comment, ...comments]);
   };
 
   const handleLikeButton = () => {
-    http
-      .post(
-        `blog-posts/${post.id}/like`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
-      .then(() => {
-        setLikes((oldState) => oldState + 1);
-        console.log("Incrementar like");
-      });
+    http.post(`blog-posts/${post.id}/like`, {}).then(() => {
+      setLikes((oldState) => oldState + 1);
+      console.log("Incrementar like");
+    });
   };
 
   return (
