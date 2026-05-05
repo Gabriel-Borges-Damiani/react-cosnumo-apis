@@ -20,7 +20,7 @@ export const ModalComment = ({
 }) => {
   const modalRef = useRef(null);
   const [loading, setLoading] = useState(false);
-  const { isAuthenticated } = useAuth;
+  const { isAuthenticated } = useAuth();
 
   const onSubmit = async (formData) => {
     const text = formData.get("text");
@@ -54,6 +54,7 @@ export const ModalComment = ({
       console.error("Erro ao criar/atualizar comentário:", error);
     }
   };
+
   return (
     <>
       <Modal ref={modalRef}>

@@ -24,7 +24,6 @@ export const Login = () => {
     const email = formData.get("email");
     const password = formData.get("password");
     const response = await login(email, password);
-
     if (response.success) {
       navigate("/");
     } else {

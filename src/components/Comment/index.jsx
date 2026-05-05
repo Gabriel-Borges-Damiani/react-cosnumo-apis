@@ -6,7 +6,7 @@ import { useState } from "react";
 import { IconButton } from "../IconButton";
 
 export const Comment = ({ comment, onDelete }) => {
-  const { user } = useAuth;
+  const { user } = useAuth();
   const [text, setText] = useState(comment.text);
 
   const isOwner = user && user.id == comment.author.id;

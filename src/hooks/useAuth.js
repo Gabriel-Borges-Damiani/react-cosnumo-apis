@@ -38,7 +38,7 @@ export const useAuth = () => {
         email,
         password,
       });
-
+      console.log("RESPOSTA DA API:", response.data);
       const data = response.data;
 
       setUser(data.user);
@@ -47,6 +47,7 @@ export const useAuth = () => {
 
       return { success: true, user };
     } catch (error) {
+      console.error("ERRO NO LOGIN:", error);
       return { success: false, error: error.message };
     }
   };

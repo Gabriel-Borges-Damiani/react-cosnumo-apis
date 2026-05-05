@@ -11,7 +11,7 @@ import { useAuth } from "../../hooks/useAuth";
 export const CardPost = ({ post }) => {
   const [likes, setLikes] = useState(post.likes);
   const [comments, setComments] = useState(post.comments);
-  const { isAuthenticated } = useAuth;
+  const { isAuthenticated } = useAuth();
 
   const handleNewComment = (comment) => {
     setComments([comment, ...comments]);
