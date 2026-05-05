@@ -21,6 +21,18 @@ export const BlogPost = () => {
     setComments(comment, ...comments);
   };
 
+  const handleDelete = (commentId) => {
+    const isConfirmed = confirm(
+      "Tem certeza que deseja excluir esse comentário?",
+    );
+
+    if (isConfirmed) {
+      http.delete(`comment/${commentId}`).then(() => {
+        setComments((oldState) => oldState.filter((c) => c.id != commentId));
+      });
+    }
+  };
+
   useEffect(() => {
     http
       .get(`blog-posts/slug/${slug}`)
@@ -72,7 +84,7 @@ export const BlogPost = () => {
       <div className={styles.code}>
         <ReactMarkdown>{post.markdown}</ReactMarkdown>
       </div>
-      <CommentList comments={comments} />
+      <CommentList comments={comments} onDelete={handleDelete} />
     </main>
   );
 };
